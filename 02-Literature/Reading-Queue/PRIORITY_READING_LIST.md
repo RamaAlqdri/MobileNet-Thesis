@@ -8,6 +8,8 @@ tags: [mobilenet, literature-review, thesis-progress]
 
 Shortlist memuat **15 paper** dari [[02-Literature/Literature-Matrix/SCREENING_MATRIX]]. Tier 1 (7 paper) memberi landasan dan pembanding langsung MobileNetV3/V4. Tier 2 (8 paper) melengkapi metode atau protokol pengukuran. Tier 3 mencatat opsi cadangan dan satu keputusan eksklusi. Urutan memperhitungkan konteks tiap tier, terutama kedekatan dengan V3/V4 dan metode yang belum punya pembanding di Tier 1. Nilai merupakan prioritas baca berdasarkan informasi screening.
 
+**Progres Phase 3** P002 dan P028 selesai direview oleh agent dan menunggu verifikasi manusia. Urutan dan skor di bawah menyimpan hasil prioritasi Phase 2. Cek [[02-Literature/Reading-Queue/READING_QUEUE]] untuk penjadwalan berikutnya berdasarkan kebutuhan bukti.
+
 ## Rubrik
 
 | Kriteria | Bobot | Sinyal K (kuat) | Sinyal C (cukup) |

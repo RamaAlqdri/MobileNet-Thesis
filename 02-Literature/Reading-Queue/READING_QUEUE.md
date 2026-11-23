@@ -8,6 +8,14 @@ tags: [mobilenet, literature-review, thesis-progress]
 
 Untuk sesi berikutnya, gunakan [[02-Literature/Reading-Queue/PRIORITY_READING_LIST|shortlist full review]] dan [[02-Literature/Literature-Matrix/SCREENING_MATRIX|keputusan screening]]. Daftar di bawah merekam urutan awal saat inventaris, berdasarkan judul dan halaman pembuka. Kotak di daftar awal mencatat pekerjaan baca, dengan status triase yang tercatat di matriks.
 
+## Progres full review
+
+- [x] [[02-Literature/Paper-Reviews/P002]] — review lengkap oleh agent.
+- [x] [[02-Literature/Paper-Reviews/P028]] — review lengkap oleh agent.
+- [ ] [[02-Literature/VERIFICATION_BACKLOG|Validasi manusia untuk P002 dan P028]].
+- [ ] [[02-Literature/Paper-Reviews/P001]] dan [[02-Literature/Paper-Reviews/P029]] — lanjut untuk bukti pruning dan pengukuran.
+- [ ] [[02-Literature/Paper-Reviews/P007]] — lanjut bila perlu pembanding ruang pencarian UIB dan protokol timing.
+
 ## MobileNetV4 dan evaluasi langsung
 
 - [ ] [[02-Literature/Paper-Reviews/P002|P002]] — sumber arsitektur dasar MobileNetV4.

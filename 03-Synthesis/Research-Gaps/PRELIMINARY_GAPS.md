@@ -63,3 +63,7 @@ Enam observasi berikut berasal dari screening korpus lokal dan berstatus **hypot
 - **Bukti pembatas** P024 sudah melaporkan memori dan kecepatan inferensi untuk model ringan dengan pengaturan kedalaman dan INT8. P021 menilai memori puncak pada GNN dan memberi contoh metode profiling. Transfer ke perbandingan V3/V4 masih perlu diperiksa. [[02-Literature/Paper-Reviews/P024]] · [[02-Literature/Paper-Reviews/P021]]
 - **Keyakinan** MEDIUM.
 - **Investigasi dan arah potensial** Periksa definisi dan metode pengukuran tiap sumber. Ukur file model, memori puncak, dan latensi untuk FP32 dan INT8 pada baseline yang disamakan sebelum menguji mixed precision atau pruning.
+
+## Bukti setelah screening
+
+[[03-Synthesis/Research-Gaps/GAP_EVIDENCE_UPDATE_P002_P028]] memetakan bukti P002 dan P028 ke G01–G06. Hipotesis awal dipertahankan di atas agar perubahan keyakinan dapat dilacak.
