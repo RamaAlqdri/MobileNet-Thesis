@@ -1,0 +1,29 @@
+# Local source corpus and derived research data
+/Paper/
+*.[Pp][Dd][Ff]
+/.local/
+/05-Experiments/data/
+/05-Experiments/runs/
+/05-Experiments/checkpoints/
+*.ckpt
+*.onnx
+*.pt
+*.pth
+*.safetensors
+*.tflite
+
+# Private notes, credentials, and machine-local state
+**/_private/
+*.private.md
+.env
+.env.*
+.DS_Store
+/.obsidian/workspace*
+/.obsidian/cache/
+/.obsidian/plugins/
+/.obsidian/community-plugins.json
+/.obsidian/sync.json
+/.obsidian/appearance.json
+/.trash/
+__pycache__/
+.venv/
