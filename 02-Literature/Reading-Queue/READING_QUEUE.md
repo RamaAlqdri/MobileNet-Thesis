@@ -12,15 +12,17 @@ Untuk sesi berikutnya, gunakan [[02-Literature/Reading-Queue/PRIORITY_READING_LI
 
 - [x] [[02-Literature/Paper-Reviews/P002]] — review lengkap oleh agent.
 - [x] [[02-Literature/Paper-Reviews/P028]] — review lengkap oleh agent.
-- [ ] [[02-Literature/VERIFICATION_BACKLOG|Validasi manusia untuk P002 dan P028]].
-- [ ] [[02-Literature/Paper-Reviews/P001]] dan [[02-Literature/Paper-Reviews/P029]] — lanjut untuk bukti pruning dan pengukuran.
-- [ ] [[02-Literature/Paper-Reviews/P007]] — lanjut bila perlu pembanding ruang pencarian UIB dan protokol timing.
+- [x] [[02-Literature/Paper-Reviews/P001]] — review lengkap oleh agent.
+- [x] [[02-Literature/Paper-Reviews/P029]] — review lengkap oleh agent.
+- [ ] [[02-Literature/VERIFICATION_BACKLOG|Validasi manusia P001, P002, P028 dan P029]].
+- [ ] [[02-Literature/Paper-Reviews/P007]] — prioritas selanjutnya untuk ruang pencarian UIB, definisi reward dan provenance latensi.
+- [ ] [[02-Literature/Paper-Reviews/P020]] — pembanding evaluasi prediktor latensi dan transfer ke hardware holdout.
 
 ## MobileNetV4 dan evaluasi langsung
 
-- [ ] [[02-Literature/Paper-Reviews/P002|P002]] — sumber arsitektur dasar MobileNetV4.
-- [ ] [[02-Literature/Paper-Reviews/P001|P001]] — modifikasi MobileNetV4 dan structured pruning.
-- [ ] [[02-Literature/Paper-Reviews/P028|P028]] — modifikasi MobileNetV4 dan evaluasi edge.
+- [x] [[02-Literature/Paper-Reviews/P002|P002]] — sumber arsitektur dasar MobileNetV4.
+- [x] [[02-Literature/Paper-Reviews/P001|P001]] — modifikasi MobileNetV4 dan structured pruning.
+- [x] [[02-Literature/Paper-Reviews/P028|P028]] — modifikasi MobileNetV4 dan evaluasi edge.
 - [ ] [[02-Literature/Paper-Reviews/P017|P017]] — modifikasi MobileNetV4-Small.
 - [ ] [[02-Literature/Paper-Reviews/P025|P025]] — MobileNetV4 dalam perbandingan lightweight CNN.
 - [ ] [[02-Literature/Paper-Reviews/P011|P011]] — aplikasi MobileNetV4-Large.
@@ -34,7 +36,7 @@ Untuk sesi berikutnya, gunakan [[02-Literature/Reading-Queue/PRIORITY_READING_LI
 - [ ] [[02-Literature/Paper-Reviews/P010|P010]] — cross-filter structured pruning.
 - [ ] [[02-Literature/Paper-Reviews/P008|P008]] — mixed-precision quantization pada CNN.
 - [ ] [[02-Literature/Paper-Reviews/P015|P015]] — kompresi CNN sebelum deployment.
-- [ ] [[02-Literature/Paper-Reviews/P029|P029]] — hybrid pruning dengan batas FLOPs dan latensi.
+- [x] [[02-Literature/Paper-Reviews/P029|P029]] — hybrid pruning dengan batas FLOPs dan latensi.
 - [ ] [[02-Literature/Paper-Reviews/P026|P026]] — pruning dan quantization pada deteksi citra edge.
 
 ## Survei dan implementasi hardware

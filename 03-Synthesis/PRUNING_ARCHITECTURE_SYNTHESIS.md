@@ -1,0 +1,48 @@
+---
+type: thematic-synthesis
+scope: [P001, P002, P028, P029]
+updated: 2026-11-23
+tags: [mobilenet, pruning, architecture-optimization, hardware-aware, literature-review]
+---
+
+# Structured pruning dan efisiensi perangkat
+
+**Temuan dari korpus.** P001 mendokumentasikan kanal lebih sempit dan ukuran file lebih kecil pada DF-MobileNetV4. P029 memperlihatkan pengurangan FLOPs oleh penghapusan blok serta waktu lebih rendah untuk paket hybrid yang dilaporkan pada target edge tanpa identitas board. Efek block pruning tersendiri terhadap waktu inferensi belum dapat diestimasi dari dua paper. P002 memperlihatkan perbedaan biaya antar-backend dengan arsitektur MobileNetV4 dan P028 menunjukkan pentingnya membedakan forward dari throughput aplikasi. Lihat [[02-Literature/Literature-Matrix/PRUNING_EVIDENCE_MATRIX]] dan [[02-Literature/Literature-Matrix/CRITICAL_EVIDENCE_MATRIX]].
+
+## Arsitektur dan perubahan beban komputasi
+
+| Paper | Baseline dan intervensi | Implikasi struktur dan batas bukti |
+| --- | --- | --- |
+| [[02-Literature/Paper-Reviews/P001]] | DF-MobileNetV4 menambahkan modul DSA dan Fused. Pruning mengurangi kanal keluaran per layer, dengan alignment 8 serta pengecualian DSA/head. | Lebar tensor dapat berubah. Cara meneruskan indeks ke layer penerima, depthwise, residual dan concat belum dapat direkonstruksi. Jadwal layerwise tidak memberi kurva sensitivitas. Perbedaan penjelasan L1 kernel dan skor BN masih terbuka. [P001-C001–P001-C005] |
+| [[02-Literature/Paper-Reviews/P029]] | MobileNetV3 dengan inverted bottleneck, DW 3×3/5×5 serta SE opsional. Bisection mempertahankan 9/13 blok pada SP. Metode hybrid menambahkan bobot sparse, quantization dan repacking. | Penghapusan blok mengubah kedalaman, sedangkan repacking menyesuaikan lebar kanal serta dependency DW→PW dan cabang. Search berangkat dari urutan tetap dan menunjukkan sensitivitas terhadap retained count. Exact graph/mask dan perubahan stride antartahap belum tersedia. [P029-C003–P029-C009] |
+| [[02-Literature/Paper-Reviews/P002]] | MobileNetV4 menggunakan UIB dengan opsi lokasi depthwise (IB, ConvNeXt-like, ExtraDW, FFN) dan Mobile MQA pada varian hybrid. TuNAS memilih konfigurasi untuk anggaran biaya. | Posisi DW dan downsampling, layout serta akses memori dapat mengubah biaya. Pengurangan kanal atau penghapusan UIB harus menjaga kompatibilitas residual dan ukuran stage. Syarat ini adalah implikasi desain, sedangkan paper mengevaluasi pilihan arsitektur dan bukan mask pruning. [P002-C001–P002-C008, P002-C015] |
+| [[02-Literature/Paper-Reviews/P028]] | Varian yang dikembangkan dari Conv-S menambah LA (perhatian ringan), PIB (bottleneck bercabang) dan loss training ASML. | Bentuk, cabang, operator dan loss ikut berubah. Ablasi modul menghubungkan pilihan desain dan perubahan waktu pada Pi, dengan graph/stride LA masih perlu konfirmasi. [P028-C001–P028-C004, P028-C007] |
+
+## Bukti kuantitatif dan perangkat
+
+| Paper dan lingkup | Bukti dalam paper | Interpretasi dan kelas kesebandingan |
+| --- | --- | --- |
+| P001 · klasifikasi RASUFI, workstation untuk eksperimen | DF padat→DF-pruned + fine-tune 95.59→96.49%, 4.0→3.2 M parameter dan 15.4→12.5 MB. FLOPs pruned dan timing perangkat fisik NR. [P001-C006–P001-C009] | **DIRECTLY COMPARABLE** untuk transkripsi pasangan T6. Atribusi gain accuracy **CONDITIONALLY COMPARABLE** karena recovery/loss. **INSUFFICIENT EVIDENCE** untuk pengaruh terhadap latency atau RSS. |
+| P029 · klasifikasi spektrogram radar, target MCU-class yang disebut penulis | V3 SP 71.1→44.0 M FLOPs dan 94.0→94.2% accuracy. V3 hybrid 71→44 M FLOPs, 5.94→1.02 MB, 94.0→94.8% accuracy di T4. Waktu T6 dari 592.5 ke 366.7 ms (38.11% hitungan ulang). [P029-C009–P029-C014] | **CONDITIONALLY COMPARABLE** untuk timing terlapor pada pasangan tetap menurut paper. Presisi tiap export dan scope timer NV. Atribusi block pruning saja **INSUFFICIENT EVIDENCE**. Konfigurasi SP tidak memiliki timing. |
+| P002 · ImageNet dan benchmark perangkat smartphone/akselerator | Table 6 mencakup beberapa CPU smartphone, mobile GPU, Hexagon DSP, EdgeTPU dan ANE. Appendix B melaporkan TFLite INT8 (termasuk CPU dengan XNNPACK), FP16 GPU, dan Core ML FP16 untuk ANE. Korelasi Spearman MAC–latency 0.962 pada Pixel 6 CPU dan 0.758 pada Pixel 4 DSP. Ablasi layout Einsum mencatat MACs sama dengan timing berbeda. [P002-C007, P002-C010–P002-C011, P002-C015–P002-C016] | Variasi lokal dalam ranking dan layout memberi dasar memilih target dan mengukur langsung. Core, stack, presisi dan kebijakan fallback harus dicatat. Hasil family benchmark tidak menguji transfer hasil pruning. |
+| P028 · kamera/PLC pada single-board computer Raspberry Pi 4B | Conv-S→Ours 33.30→39.58 ms per forward dan hasil stress test konfigurasi Ours 23.35 FPS full pipeline selama 8 jam. Nilai forward Ours dilaporkan 25.27 FPS. Fig. 16(c) memberi tren memory usage sistem, scope peak/RSS NV. [P028-C007–P028-C009, P028-C015–P028-C017] | Model forward dan full pipeline memiliki denominator waktu berbeda. ONNX digambarkan untuk deployment, dengan provider, precision dan konfigurasi eksekusi Pi belum terverifikasi. Peningkatan accuracy akibat perubahan modul dapat menghabiskan sebagian anggaran waktu. |
+
+Smartphone P002 memakai sistem dan akselerator dengan dukungan operator dan stack yang terdokumentasi sebagian. Pi P028 merupakan SBC yang menangani antrean dan komunikasi PLC. MCU P029 merupakan target disebutkan untuk workload spektrogram dengan batas flash/SRAM yang belum diidentifikasi. Workstation P001 hanya mendukung eksperimen yang dilaporkan. Waktu absolut antar-paper **NOT DIRECTLY COMPARABLE** karena task, input, graph, perangkat, presisi dan timer berbeda. Bukti untuk penyamaan kondisi ini **INSUFFICIENT EVIDENCE**. Definisi metrik di [[docs/METRIC_DEFINITIONS]] memandu desain kontrol yang sama.
+
+## Jawaban sementara RQ-A–RQ-F
+
+- **RQ-A** — Channel pruning P001 mengubah lebar layer. Block pruning P029 mengubah kedalaman backbone dan pipeline hybrid dapat kembali mengubah lebar. Rekonstruksi graph perlu mempertahankan tensor dependen. [P001-C003–P001-C005, P029-C003–P029-C007]
+- **RQ-B** — Channel pruning P001 menunjukkan +0.90 pp accuracy setelah recovery, parameter −20.00% dan file −18.83%. P029 V3 SP menunjukkan +0.20 pp dan FLOPs −38.12%, dengan size −82.32% berdasarkan pasangan Table 4. Hybrid menunjukkan +0.80 pp accuracy terlapor, −38.03% FLOPs serta −82.83% size. V3 raw parameter count P029 belum dilaporkan. [P001-C007–P001-C009, P029-C009–P029-C012]
+- **RQ-C** — P029 mencatat FLOPs dan timing turun bersamaan pada keempat hybrid. Untuk UP+Q, FLOPs tetap dan pengukuran timing absen. P002 menunjukkan timing berbeda meski MACs sama pada ablasi layout. P001 juga tidak memberi timing pasangan. Maka bukti mendukung kemungkinan percepatan dalam kondisi tertentu. [P029-C010, P029-C013, P002-C007, P001-C009]
+- **RQ-D** — Backend, layout operator dan kompatibilitas berpengaruh pada P002, sedangkan cakupan timer berpengaruh pada P028. P029 belum memisahkan efek INT8, pruning dan repacking. Tesis perlu mengikat export yang sama dengan backend dan precision yang dicatat serta memperlakukan platform berbeda sebagai strata tersendiri. [P002-C007, P002-C011, P028-C015–P028-C017, P029-C006, P029-C013]
+- **RQ-E** — P001 dan P029 memakai dataset spesifik domain, dan masing-masing memiliki pertanyaan split/holdout. P029 belum menunjukkan bukti transfer lintas perangkat, sementara P001 absen timing perangkat fisik. Perbedaan stack atau protokol dan hilangnya rincian preprocessing, batch dan warm-up menghambat generalisasi. [P001-C009–P001-C012, P029-C002, P029-C013–P029-C017]
+- **RQ-F** — Jadwal layer P001, ambang latensi formal P029, peringkat biaya P002 dan timing terpisah di P028 memberi alasan menguji pruning dengan anggaran latensi aktual. Kelayakan dan keuntungan pada MobileNetV4 memerlukan kontrol terhadap recovery, precision dan bentuk graph serta audit jumlah kandidat. [P001-C004–P001-C006, P029-C004, P002-C015–P002-C016, P028-C007, P028-C015]
+
+## Konsistensi, konflik dan cakupan
+
+- **Konsisten** — Pengurangan lebar/kedalaman pada P001/P029 menunjukkan perubahan ukuran model. P029 mengukur perubahan FLOPs SP melalui operasi model. P002/P028 mendukung pengujian performa pada perangkat spesifik dengan pemisahan ukuran komputasi dan waktu.
+- **Bervariasi** — Accuracy hybrid P029 pada T4 naik untuk V3 dan B0 lalu turun untuk V2 dan SqueezeNet. Ini membatasi klaim hybrid terbaik lintas semua backbone dan rentang akurasi ±0.6 pp di kesimpulan. Pada P028, +6.28 ms dari angka tabel bertentangan dengan sekitar 3.6 ms dalam prosa. Konflik tersebut membatasi proyeksi ukuran manfaat. [P029-C010–P029-C012, P029-C016, P028-C009]
+- **Berlaku pada setup tertentu** — P029 Table 6 memberi perubahan untuk paket hybrid dan hardware yang diklaim tetap. P002 memperlihatkan kompatibilitas berbeda (termasuk Hybrid pada DSP) serta kecocokan estimasi biaya lintas perangkat yang tidak seragam. Throughput P028 berlaku untuk pipeline Pi yang diuji. [P029-C013, P002-C010, P002-C016, P028-C015]
+- **Belum tersedia** — Benchmark target untuk P001 dan SP tersendiri P029, benchmark lintas target pada export pruning yang sama, pelacakan ukuran serialisasi terhadap peak RAM/arena dan energi, serta checkpoint, split dan log timing mentah. Bukti dan konflik per paper dapat diaudit melalui [[02-Literature/VERIFICATION_BACKLOG]].
+
+Lanjut di [[03-Synthesis/Research-Gaps/GAP_EVIDENCE_UPDATE_P001_P029]] dan [[03-Synthesis/Research-Directions/INITIAL_PRUNING_RESEARCH_DIRECTIONS]]. Rujukan definisi kesebandingan sebelumnya di [[03-Synthesis/PAIRWISE_COMPARISON_P002_P028]].

@@ -1,0 +1,68 @@
+---
+type: pruning-evidence-matrix
+scope: [P001, P029]
+updated: 2026-11-23
+tags: [mobilenet, pruning, hardware-aware, literature-review]
+---
+
+# Pasangan baseline–pruned
+
+Gabungkan tabel di halaman ini melalui Experiment ID. Tiap pasangan mengikuti pembanding yang dilaporkan dalam paper. `NR` = Not reported, `NV` = Not verified, `VL` = Verified locally, `PV` = Partially verified. Angka mentah memakai satuan sumber. Pengurangan relatif selalu `(sebelum−sesudah)/sebelum × 100`. Selisih accuracy dihitung `sesudah−sebelum` dalam poin persentase (pp). Desimal pada tabel memakai titik.
+
+## Arsitektur dan kualitas
+
+| Paper ID | Experiment ID | Baseline | Hasil | Strategi dan granularitas | Definisi rasio | Dataset dan input | Accuracy sebelum → sesudah (%) | Δ accuracy (pp) | F1 sebelum → sesudah (%) | Locator dan status |
+| --- | --- | --- | --- | --- | --- | --- | --- | ---: | --- | --- |
+| [[02-Literature/Paper-Reviews/P001]] | P001-PR01 | DF-MobileNetV4 padat | DF-MobileNetV4-pruning | Channel output per layer, alignment 8, fine-tune AdamW | 10–65% target penghapusan kanal per layer. DSA dan head dikecualikan. Skor aktual NV. | RASUFI, test nominal sama. Input inferensi NR. | 95.59 → 96.49 | +0.90 | 95.60 → 96.44, macro NV | P001-C003/P001-C004/P001-C006–P001-C008, PDF 6–7, 13 · VL untuk angka, PV untuk atribusi |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR01 | MobileNetV3 baseline | MobileNetV3 UP+Q | Global weight magnitude + INT8 | Sparsitas T4 0.70 | Radar CW, test nominal sama, STFT 227×227; split NV | 94.0 → 94.4 | +0.40 | 93.9 → 94.3 | P029-C010 · T4, PDF 16 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR02 | MobileNetV3 baseline | MobileNetV3 SP | Block pruning melalui bisection | Blok 9/13 dipertahankan (30.77% dibuang, T3 SP) | Radar CW, test nominal sama, STFT 227×227; split NV | 94.0 → 94.2 | +0.20 | 93.9 → 94.1 | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR03 | MobileNetV3 baseline | MobileNetV3 Hybrid | Block bisection + global magnitude + INT8, repacking di metode | Sparsitas T4 0.40; jumlah blok T6 NV | Radar CW, test nominal sama, STFT 227×227; split NV | 94.0 → 94.8 | +0.80 | 93.9 → 95.6 | P029-C010 · T4, PDF 16; P029-C011; P029-C013 · T6, PDF 18 · PV |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR04 | MobileNetV2 baseline | MobileNetV2 UP+Q | Global weight magnitude + INT8 | Sparsitas T4 0.30 | Radar CW, test nominal sama, STFT 227×227; split NV | 94.4 → 92.8 | -1.60 | 94.4 → 92.9 | P029-C010 · T4, PDF 16; P029-C012 (baseline) · PV |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR05 | MobileNetV2 baseline | MobileNetV2 SP | Block pruning melalui bisection | Blok 9/18 dipertahankan (50.00% dibuang, T3 SP) | Radar CW, test nominal sama, STFT 227×227; split NV | 94.4 → 95.0 | +0.60 | 94.4 → 95.0 | P029-C010 · T4, PDF 16; T3, PDF 14; P029-C012 (baseline) · PV |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR06 | MobileNetV2 baseline | MobileNetV2 Hybrid | Block bisection + global magnitude + INT8, repacking di metode | Sparsitas T4 0.10; jumlah blok T6 NV | Radar CW, test nominal sama, STFT 227×227; split NV | 94.4 → 93.6 | -0.80 | 94.4 → 93.6 | P029-C010 · T4, PDF 16; P029-C012 (baseline); P029-C013 · T6, PDF 18 · PV |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR07 | EfficientNet-B0 baseline | EfficientNet-B0 UP+Q | Global weight magnitude + INT8 | Sparsitas T4 0.80 | Radar CW, test nominal sama, STFT 227×227; split NV | 93.2 → 94.6 | +1.40 | 93.2 → 94.6 | P029-C010 · T4, PDF 16 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR08 | EfficientNet-B0 baseline | EfficientNet-B0 SP | Block pruning melalui bisection | Blok 7/15 dipertahankan (53.33% dibuang, T3 SP) | Radar CW, test nominal sama, STFT 227×227; split NV | 93.2 → 93.6 | +0.40 | 93.2 → 93.6 | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR09 | EfficientNet-B0 baseline | EfficientNet-B0 Hybrid | Block bisection + global magnitude + INT8, repacking di metode | Sparsitas T4 0.40; jumlah blok T6 NV | Radar CW, test nominal sama, STFT 227×227; split NV | 93.2 → 93.4 | +0.20 | 93.2 → 93.4 | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 · PV |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR10 | SqueezeNet baseline | SqueezeNet UP+Q | Global weight magnitude + INT8 | Sparsitas T4 0.80 | Radar CW, test nominal sama, STFT 227×227; split NV | 92.8 → 93.0 | +0.20 | 92.7 → 93.0 | P029-C010 · T4, PDF 16 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR11 | SqueezeNet baseline | SqueezeNet SP | Block pruning melalui bisection | Blok 8/9 dipertahankan (11.11% dibuang, T3 SP) | Radar CW, test nominal sama, STFT 227×227; split NV | 92.8 → 92.2 | -0.60 | 92.7 → 92.2 | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| [[02-Literature/Paper-Reviews/P029]] | P029-PR12 | SqueezeNet baseline | SqueezeNet Hybrid | Block bisection + global magnitude + INT8, repacking di metode | Sparsitas T4 0.50; jumlah blok T6 NV | Radar CW, test nominal sama, STFT 227×227; split NV | 92.8 → 92.2 | -0.60 | 92.7 → 92.1 | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 · PV |
+
+## Biaya komputasi, penyimpanan dan timing
+
+| Paper ID | Experiment ID | Parameter sebelum → sesudah | Reduksi parameter (%) | MACs sebelum → sesudah / reduksi | FLOPs sebelum → sesudah / reduksi | Ukuran sebelum → sesudah / reduksi | Latency sebelum → sesudah / reduksi | Peak RAM / energi | Locator dan status |
+| --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |
+| P001 | P001-PR01 | 4.0 → 3.2 M (Table 6) | 20.00 | NR / NR | 1 G DF padat (Table 3) → NR / NR | 15.4 → 12.5 MB / 18.83% | NR → NR / NR | NR / NR | P001-C007–P001-C009, PDF 8, 12–13 · VL |
+| P029 | P029-PR01 | NR → NR | NR | NR / NR | 71 → 71 M / 0.00% (T4) | 5.94 → 4.42 MB / 25.59% | 592.5 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16 · VL |
+| P029 | P029-PR02 | NR → NR | NR | NR / NR | 71.1 → 44.0 M / 38.12% (T3) | 5.94 → 1.05 MB / 82.32% | 592.5 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| P029 | P029-PR03 | NR → NR | NR | NR / NR | 71 → 44 M / 38.03% (T4) | 5.94 → 1.02 MB / 82.83% | 592.5 → 366.7 ms / 38.11% | NR / NR | P029-C010 · T4, PDF 16; P029-C011; P029-C013 · T6, PDF 18 · PV |
+| P029 | P029-PR04 | NR → NR | NR | NR / NR | 373 → 373 M / 0.00% (T4) | 8.74 → 6.50 MB / 25.63% | 3108.8 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16; P029-C012 (baseline) · PV |
+| P029 | P029-PR05 | 4.37 → 0.58 M, SP menurut setting akurasi/FLOPs di prosa, unit dan pasangan PV | 86.73 (PV) | NR / NR | 373.1 → 160.1 M / 57.09% (T3) | 8.74 → 0.58 MB / 93.36% | 3108.8 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16; T3, PDF 14; P029-C012 (baseline) · PV |
+| P029 | P029-PR06 | NR → NR | NR | NR / NR | 373 → 160 M / 57.10% (T4) | 8.74 → 0.48 MB / 94.51% | 3108.8 → 1334.2 ms / 57.08% | NR / NR | P029-C010 · T4, PDF 16; P029-C012 (baseline); P029-C013 · T6, PDF 18 · PV |
+| P029 | P029-PR07 | NR → NR | NR | NR / NR | 27 → 27 M / 0.00% (T4) | 15.59 → 15.59 MB / 0.00% | 226.5 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16 · VL |
+| P029 | P029-PR08 | NR → NR | NR | NR / NR | 27.2 → 21.5 M / 20.96% (T3) | 15.59 → 1.35 MB / 91.34% | 226.5 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| P029 | P029-PR09 | NR → NR | NR | NR / NR | 27 → 21 M / 22.22% (T4) | 15.59 → 1.20 MB / 92.30% | 226.5 → 179.2 ms / 20.88% | NR / NR | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 · PV |
+| P029 | P029-PR10 | NR → NR | NR | NR / NR | 287 → 287 M / 0.00% (T4) | 2.78 → 2.48 MB / 10.79% | 2399.2 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16 · VL |
+| P029 | P029-PR11 | NR → NR | NR | NR / NR | 287.9 → 170.7 M / 40.71% (T3) | 2.78 → 0.47 MB / 83.09% | 2399.2 ms (baseline nominal T6, PDF 18) → NR / NR | NR / NR | P029-C010 · T4, PDF 16; T3, PDF 14 · VL |
+| P029 | P029-PR12 | NR → NR | NR | NR / NR | 287 → 170 M / 40.77% (T4) | 2.78 → 0.47 MB / 83.09% | 2399.2 → 1422.5 ms / 40.71% | NR / NR | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 · PV |
+
+## Validitas pengukuran
+
+| Experiment ID | Hardware / runtime / precision | Batas timing dan protokol | Klasifikasi dan alasan |
+| --- | --- | --- | --- |
+| P001-PR01 | RTX 3090 + Xeon Gold 6146, PyTorch 2.5.1/CUDA 12.4 pada setup eksperimen. Hardware target, runtime, delegate, precision inference NR. | **Unclear / Not reported**. Threads, batch inferensi, warm-up, preprocessing dalam timer dan pengulangan NR. | **DIRECTLY COMPARABLE** untuk nilai accuracy, parameter dan MB sebagaimana dipasangkan Table 6. **CONDITIONALLY COMPARABLE** untuk efek pruning pada accuracy, karena fine-tuning dan loss ikut berubah. **INSUFFICIENT EVIDENCE** untuk efek latency. |
+| P029-PR01 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR02 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR03 | Target edge, MCU Cortex 32-bit dituju. Board/runtime/kernel dan presisi pasangan NV. | **Unclear / Not reported**. T6 menyebut end-to-end. Hardware/batch tetap menurut penulis, nilai batch, threads, warm-up, timer pre/post, repetisi/statistik NR. | **CONDITIONALLY COMPARABLE** untuk timing terlapor pada satu setup dan bagi seluruh paket. Efek masing-masing teknik **INSUFFICIENT EVIDENCE**. Fig. 9(a) dan accuracy T4 tidak cocok. |
+| P029-PR04 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. Baseline T2→rezim T4 **NOT DIRECTLY COMPARABLE** tanpa penjelasan baseline. |
+| P029-PR05 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. Baseline T2→rezim T4 **NOT DIRECTLY COMPARABLE** tanpa penjelasan baseline. |
+| P029-PR06 | Target edge, MCU Cortex 32-bit dituju. Board/runtime/kernel dan presisi pasangan NV. | **Unclear / Not reported**. T6 menyebut end-to-end. Hardware/batch tetap menurut penulis, nilai batch, threads, warm-up, timer pre/post, repetisi/statistik NR. | **CONDITIONALLY COMPARABLE** untuk timing terlapor pada satu setup dan bagi seluruh paket. Efek masing-masing teknik **INSUFFICIENT EVIDENCE**. Baseline T2→rezim T4 **NOT DIRECTLY COMPARABLE** tanpa penjelasan baseline. |
+| P029-PR07 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR08 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR09 | Target edge, MCU Cortex 32-bit dituju. Board/runtime/kernel dan presisi pasangan NV. | **Unclear / Not reported**. T6 menyebut end-to-end. Hardware/batch tetap menurut penulis, nilai batch, threads, warm-up, timer pre/post, repetisi/statistik NR. | **CONDITIONALLY COMPARABLE** untuk timing terlapor pada satu setup dan bagi seluruh paket. Efek masing-masing teknik **INSUFFICIENT EVIDENCE**. |
+| P029-PR10 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR11 | Training i5-13600K; runtime/precision inferensi NR | **Unclear / Not reported**. Timing model pruned NR. | Kualitas pada split nominal **CONDITIONALLY COMPARABLE**; latency **INSUFFICIENT EVIDENCE**. |
+| P029-PR12 | Target edge, MCU Cortex 32-bit dituju. Board/runtime/kernel dan presisi pasangan NV. | **Unclear / Not reported**. T6 menyebut end-to-end. Hardware/batch tetap menurut penulis, nilai batch, threads, warm-up, timer pre/post, repetisi/statistik NR. | **CONDITIONALLY COMPARABLE** untuk timing terlapor pada satu setup dan bagi seluruh paket. Efek masing-masing teknik **INSUFFICIENT EVIDENCE**. |
+
+P001 MobileNetV4 asli (92.89%, 2.5 M, 9.5 MB) tetap sebagai konteks arsitektur. Perbandingan MobileNetV4 asli→DF pruned **NOT DIRECTLY COMPARABLE** sebagai estimasi efek pruning karena DSA/Fused, training dan pruning berbeda. Rincian konfigurasi individual tersedia di [[02-Literature/Literature-Matrix/CRITICAL_EVIDENCE_MATRIX]].
+
+Untuk P029, seluruh pasangan membandingkan rezim di Table 4 dalam backbone yang sama, dengan pengecualian FLOPs SP dari Table 3 dan timing baseline→hybrid dari Table 6. `NR / NR` pada kolom MACs berarti operand dan reduksi tidak dilaporkan. Kolom parameter menghindari konversi MB ke jumlah bobot. V2 SP 4.37→0.58 M dari prosa PDF 17 bersifat parsial. FLOPs dan ukuran **DIRECTLY COMPARABLE** secara deskriptif dalam pasangan tabel, dengan perhatian khusus pada pembulatan T3/T4. P029 melaporkan penghematan timing hybrid 38.1%, 57.1%, 20.9% dan 40.7% sesuai urutan backbone di atas. Reduksi pada kolom timing dihitung ulang dari operand T6. Tidak ada delta latensi untuk SP atau UP+Q. Detail konflik dan measurement boundary tersedia di [[02-Literature/Paper-Reviews/P029#Evidence references]] dan [[02-Literature/VERIFICATION_BACKLOG]].

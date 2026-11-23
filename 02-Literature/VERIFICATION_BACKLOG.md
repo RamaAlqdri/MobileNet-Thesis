@@ -1,6 +1,6 @@
 ---
 type: verification-backlog
-scope: [P002, P028]
+scope: [P002, P028, P001, P029]
 updated: 2026-11-23
 tags: [mobilenet, literature-review, thesis-progress]
 ---
@@ -26,3 +26,16 @@ Status `OPEN` berarti data atau klarifikasi berikutnya masih diperlukan. Klaim t
 | V13 | Tinggi · OPEN | Validasi manusia atas evidence P002-C001–P002-C016 dan P028-C001–P028-C020, terutama denominator MQA, konflik tabel P028 dan interpretasi Fig. 16(c). | Peneliti memeriksa PDF, mengesahkan atau mengoreksi transkripsi dan perhitungan, serta menandai klaim yang dapat dipakai dalam tesis. |
 
 Matriks pelacakan ada di [[02-Literature/Literature-Matrix/CRITICAL_EVIDENCE_MATRIX]]. Item lama di luar target sesi tetap terdokumentasi di [[02-Literature/PAPER_INVENTORY]].
+
+## Phase 4 — structured pruning dan hardware
+
+| ID | Prioritas/status | Evidence dan pertanyaan | Bukti yang menutup item |
+| --- | --- | --- | --- |
+| V14 | Tinggi · OPEN | [[02-Literature/Paper-Reviews/P001#Evidence references]] P001-C001–P001-C005, PDF 4–7, 12–13. L1 kernel vs BN dan cara menerapkan alignment. DW pada Eq. 2 vs Fig. 6, baris 23–24 dan shape kanal IB/DSA Table 2, subvarian baseline dan peta sensitivity belum tuntas. | Proof final atau kode/graph, mask dan indeks kanal, ranking per layer serta konfigurasi ekspor. |
+| V15 | Tinggi · OPEN | P001-C006–P001-C012, PDF 3, 7–14. Total 4.944 vs 4.994 dan prosedur cross-domain. Cek Table 6, macro-F1, resep dense+FT dan identitas checkpoint. | Daftar split per video/hari, seed, prediksi/label, definisi agregasi F1 serta run matched recovery. |
+| V16 | Tinggi · OPEN | P001-C007–P001-C009, PDF 8, 13. Untuk DF pruned, FLOPs dan timing perangkat belum dilaporkan. | Profil paired dense/pruned dengan hardware, runtime, precision, scope, batch/threads, pengulangan, peak RAM, artefak dan perhitungan FLOPs yang sama. |
+| V17 | Tinggi · OPEN | [[02-Literature/Paper-Reviews/P029#Evidence references]] P029-C013–P029-C014, PDF 5, 16–19. Audit Table 6, device provenance, jenis precision masing-masing model dan cakupan timer, termasuk STFT/CA-CFAR. Precision parity belum diketahui. | Model/timing log asli dengan board, clock, compiler/runtime/kernel, format INT8, batch/thread, warm-up, statistik dan timestamp untuk tiap konfigurasi. Tambahkan paired timings SP, UP+Q dan hybrid. |
+| V18 | Tinggi · OPEN | P029-C002, P029-C011–P029-C012, P029-C016–P029-C017, PDF 5–6, 11–12, 14, 16–17, 20–21. Fig. 9(a) memberi 478/500 benar, T4 V3 hybrid memuat accuracy 94.8%. T2/T4 V2 berbeda. Prosa 0.58 M params dapat tertukar dengan 0.58 MB. Angka T3 SP V2 dibahas sebagai hybrid. | Identitas holdout dan checkpoint yang sama, confusion matrix mentah, kode agregasi klasifikasi, param count dan metadata artefak T2/T3/T4. |
+| V19 | Menengah · OPEN | P029-C003–P029-C008, PDF 5–10, 12–15, 18. Fig. 6(a) input 24 vs RGB dan delapan baris bneck vs retained count sembilan. Cek anggaran/oracle, bisection order, kuantil `1−r`, lima vs dua evaluasi dan per-channel vs global min–max INT8. | Graph tiap export, peta order/repack/mask, konvensi kuantil, logs per kandidat dan skema kalibrasi dengan precision aktivasi yang dipakai. |
+| V20 | Tinggi · OPEN | P029-C010, P029-C014, PDF 16–19. Weights-only hybrid di prosa cocok dengan baris SP untuk sebagian backbone. Peak SRAM/aktivasi/flash dan energi belum diukur dalam hasil yang tersedia. | File dan format serialisasi, build map/flash, peak SRAM atau arena dengan scope, daya dikoreksi idle, serta konfigurasi pengukuran per artefak. |
+| V21 | Tinggi · OPEN | Audit manusia P001-C001–P001-C012 dan P029-C001–P029-C017. Prioritas pada T6 P001, T3–T6 P029, Fig. 6(a) dan Fig. 9(a). | Selesaikan Human Validation Checklist di kedua review, verifikasi hitungan pada [[02-Literature/Literature-Matrix/PRUNING_EVIDENCE_MATRIX]], lalu catat status/evidence yang boleh dipakai pada tesis. |

@@ -11,4 +11,6 @@ tags: [mobilenet, thesis-progress]
 
 - Phase 3 — [[03-Synthesis/PAIRWISE_COMPARISON_P002_P028]] merekam keputusan tentang kesebandingan timing. [[03-Synthesis/Research-Gaps/GAP_EVIDENCE_UPDATE_P002_P028]] mempertahankan enam kandidat sebagai hipotesis.
 
+- Phase 4 — [[03-Synthesis/PRUNING_ARCHITECTURE_SYNTHESIS]] mencatat pemisahan hasil paket hybrid dari efek structured pruning. [[03-Synthesis/Research-Gaps/GAP_EVIDENCE_UPDATE_P001_P029]] mencatat status dukungan yang terbatas pada korpus.
+
 Untuk keputusan berikutnya, gunakan [[templates/RESEARCH_DECISION_TEMPLATE]].

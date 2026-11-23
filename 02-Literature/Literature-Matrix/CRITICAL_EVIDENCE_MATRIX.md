@@ -1,11 +1,11 @@
 ---
 type: critical-evidence-matrix
-scope: [P002, P028]
+scope: [P002, P028, P001, P029]
 updated: 2026-11-23
 tags: [mobilenet, literature-review, hardware-aware]
 ---
 
-# Matriks bukti kritis P002 dan P028
+# Matriks bukti kritis
 
 Satu baris per konfigurasi model × perangkat atau kondisi eksperimen yang dipilih. Untuk varian utama, matriks mencakup seluruh perangkat Table 6 P002 dan seluruh kondisi Table 7 P028. Baris lain mencakup pembanding yang membantu interpretasi, eksperimen search, distilasi, detektor, attention, robustness, dan deployment. Data agregat yang tidak dapat dipasangkan dengan konfigurasi eksekusi, seperti statistik korelasi roofline, tetap di review sumber. Angka yang muncul kembali pada tabel lain ditautkan tanpa menduplikasi konfigurasi identik. Titik desimal pada tabel mengikuti notasi PDF.
 
@@ -175,3 +175,40 @@ Model size dalam byte dan energi per inferensi `NR` untuk konfigurasi yang dicat
 | P028-E046 | Ours, kalimat single-image processing | B-AMB | Raspberry Pi 4B (sistem) | NR | NR | 39 ms, cakupan timer NV | P028-C017 · On-site system deployment, PDF 23 | PV |
 
 Perbandingan yang memakai matriks ini ada di [[03-Synthesis/PAIRWISE_COMPARISON_P002_P028]]. Konflik dan metadata yang belum lengkap ada di [[02-Literature/VERIFICATION_BACKLOG]].
+
+## P001 — konfigurasi pruning Phase 4
+
+C-CLS merujuk eksperimen klasifikasi RASUFI (§§2.2, 3.5–3.6, 4.4). Data crop 1920×1053, bentuk tensor inferensi NR. Workstation RTX 3090/Xeon Gold 6146, PyTorch 2.5.1/CUDA 12.4 adalah setup eksperimen. Perangkat target, runtime dan presisi inference, batch, threads, warm-up, pengulangan timing, peak RAM dan energi NR. Tidak ada hasil latensi/throughput untuk menyatakan batas timing. Ukuran model di kolom biaya berasal dari Table 6. Pasangan dan reduksi ada di [[02-Literature/Literature-Matrix/PRUNING_EVIDENCE_MATRIX]].
+
+| ID | Model atau konfigurasi | Profil | Hardware | Akurasi / kualitas | Parameter / kompleksitas / ukuran | Latensi atau throughput | Evidence dan halaman PDF | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P001-E001 | MobileNetV4 asli | C-CLS | Workstation setup | 92.89% accuracy / 92.88% F1 | 2.5 M / NR FLOPs / 9.5 MB | NR | P001-C007 · T6, PDF 13 | VL |
+| P001-E002 | DF-MobileNetV4 padat | C-CLS | Workstation setup | 95.59% accuracy / 95.60% F1 | 4.0 M / 1 G FLOPs (T3) / 15.4 MB | NR | P001-C007, P001-C009 · T3 (4.04 M), T6 (4.0 M), PDF 8, 13 | VL |
+| P001-E003 | DF-MobileNetV4-pruning + fine-tuning | C-CLS | Workstation setup | 96.49% accuracy / 96.44% F1 | 3.2 M / NR FLOPs / 12.5 MB | NR | P001-C007 · T6, PDF 13 | VL |
+
+## P029 — konfigurasi pruning Phase 4
+
+**D-CLS** adalah task internal radar CW, input STFT 227×227 RGB menurut metode. Penulis menyebut held-out test dan aturan validasi yang belum konsisten. Training di Intel Core i5-13600K dengan batch 64, framework dan precision evaluasi klasifikasi NR. FLOPs dibaca dari T4 dalam juta operasi. MACs, cara menghitung FLOPs, parameter mentah tabel, peak RAM, flash aktual, energi serta throughput NR. Precision untuk metode UP+Q/hybrid dilaporkan sebagai INT8 untuk bobot, tetapi skala, aktivasi dan artefak evaluasi NV. P029-C002/C005–C006/C009–C014.
+
+**D-RT** adalah timing T6 untuk baseline dan hybrid pada target edge yang disebut penulis. Board/part number, clock, backend, presisi tiap artefak, delegate, compiler, batch aktual, threads, warm-up, repetisi dan statistik NR. **Unclear / Not reported** karena titik awal/akhir timer dan inklusi preprocessing belum diketahui. Angka ms ditranskripsi secara lokal dan provenance pengukuran berstatus PV. Setup training bukan bukti hardware timing. Pasangan dan perhitungan ada di [[02-Literature/Literature-Matrix/PRUNING_EVIDENCE_MATRIX]].
+
+| ID | Model atau konfigurasi | Profil | Hardware | Akurasi / kualitas | Parameter / kompleksitas / ukuran | Latensi atau throughput | Evidence dan halaman PDF | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P029-E001 | MobileNetV3 baseline | D-CLS + D-RT | Target edge terlapor (board NV) | 94.0% acc / 93.9% recall / 93.9% F1 | NR parameter / 71 M FLOPs / 5.94 MB / spar. 0 | 592.5 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 | PV |
+| P029-E002 | MobileNetV3 UP+Q | D-CLS | Timing NR | 94.4% acc / 94.4% recall / 94.3% F1 | NR parameter / 71 M FLOPs / 4.42 MB / spar. 0.70 | NR | P029-C010 · T4, PDF 16 | VL |
+| P029-E003 | MobileNetV3 SP | D-CLS | Timing NR | 94.2% acc / 94.2% recall / 94.1% F1 | NR parameter / 44 M FLOPs / 1.05 MB / spar. 0 | NR | P029-C010 · T4, PDF 16; T3, PDF 14 | VL |
+| P029-E004 | MobileNetV3 Hybrid | D-CLS + D-RT | Target edge terlapor (board NV) | 94.8% acc / 94.8% recall / 95.6% F1 | NR parameter / 44 M FLOPs / 1.02 MB / spar. 0.40 | 366.7 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C011; P029-C013 · T6, PDF 18 | PV |
+| P029-E005 | MobileNetV2 baseline | D-CLS + D-RT | Target edge terlapor (board NV) | 94.4% acc / 94.4% recall / 94.4% F1 | NR parameter / 373 M FLOPs / 8.74 MB / spar. 0 | 3108.8 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C012 (baseline); P029-C013 · T6, PDF 18 | PV |
+| P029-E006 | MobileNetV2 UP+Q | D-CLS | Timing NR | 92.8% acc / 92.7% recall / 92.9% F1 | NR parameter / 373 M FLOPs / 6.50 MB / spar. 0.30 | NR | P029-C010 · T4, PDF 16; P029-C012 (baseline) | PV |
+| P029-E007 | MobileNetV2 SP | D-CLS | Timing NR | 95.0% acc / 95.0% recall / 95.0% F1 | NR parameter / 160 M FLOPs / 0.58 MB / spar. 0 | NR | P029-C010 · T4, PDF 16; T3, PDF 14; P029-C012 (baseline) | PV |
+| P029-E008 | MobileNetV2 Hybrid | D-CLS + D-RT | Target edge terlapor (board NV) | 93.6% acc / 93.6% recall / 93.6% F1 | NR parameter / 160 M FLOPs / 0.48 MB / spar. 0.10 | 1334.2 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C012 (baseline); P029-C013 · T6, PDF 18 | PV |
+| P029-E009 | EfficientNet-B0 baseline | D-CLS + D-RT | Target edge terlapor (board NV) | 93.2% acc / 93.2% recall / 93.2% F1 | NR parameter / 27 M FLOPs / 15.59 MB / spar. 0 | 226.5 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 | PV |
+| P029-E010 | EfficientNet-B0 UP+Q | D-CLS | Timing NR | 94.6% acc / 94.6% recall / 94.6% F1 | NR parameter / 27 M FLOPs / 15.59 MB / spar. 0.80 | NR | P029-C010 · T4, PDF 16 | VL |
+| P029-E011 | EfficientNet-B0 SP | D-CLS | Timing NR | 93.6% acc / 93.5% recall / 93.6% F1 | NR parameter / 21 M FLOPs / 1.35 MB / spar. 0 | NR | P029-C010 · T4, PDF 16; T3, PDF 14 | VL |
+| P029-E012 | EfficientNet-B0 Hybrid | D-CLS + D-RT | Target edge terlapor (board NV) | 93.4% acc / 93.4% recall / 93.4% F1 | NR parameter / 21 M FLOPs / 1.20 MB / spar. 0.40 | 179.2 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 | PV |
+| P029-E013 | SqueezeNet baseline | D-CLS + D-RT | Target edge terlapor (board NV) | 92.8% acc / 92.7% recall / 92.7% F1 | NR parameter / 287 M FLOPs / 2.78 MB / spar. 0 | 2399.2 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 | PV |
+| P029-E014 | SqueezeNet UP+Q | D-CLS | Timing NR | 93.0% acc / 93.0% recall / 93.0% F1 | NR parameter / 287 M FLOPs / 2.48 MB / spar. 0.80 | NR | P029-C010 · T4, PDF 16 | VL |
+| P029-E015 | SqueezeNet SP | D-CLS | Timing NR | 92.2% acc / 92.2% recall / 92.2% F1 | NR parameter / 170 M FLOPs / 0.47 MB / spar. 0 | NR | P029-C010 · T4, PDF 16; T3, PDF 14 | VL |
+| P029-E016 | SqueezeNet Hybrid | D-CLS + D-RT | Target edge terlapor (board NV) | 92.2% acc / 92.1% recall / 92.1% F1 | NR parameter / 170 M FLOPs / 0.47 MB / spar. 0.50 | 1422.5 ms (statistik NR) | P029-C010 · T4, PDF 16; P029-C013 · T6, PDF 18 | PV |
+
+Klaim Phase 4 ada di [[02-Literature/Paper-Reviews/P001#Evidence references]] dan [[02-Literature/Paper-Reviews/P029#Evidence references]]. Table 2 P029 dipertahankan sebagai konteks di review, khususnya perbedaan baseline MobileNetV2. Rumus dan pasangan antar-rezim ada di matriks pruning.
