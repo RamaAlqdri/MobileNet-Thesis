@@ -6,7 +6,7 @@ tags: [mobilenet, literature-review, thesis-progress]
 
 # Antrean baca
 
-Prioritas berangkat dari judul dan ruang lingkup yang tampak pada halaman pembuka. Setiap entri masih menunggu screening. Tetapkan kriteria di [[01-Research-Planning/RESEARCH_PLAN]], lalu catat keputusan dan alasannya pada catatan Paper ID. Tambahkan PDF dasar MobileNetV3 jika ditemukan dalam sumber lokal yang diizinkan.
+Untuk sesi berikutnya, gunakan [[02-Literature/Reading-Queue/PRIORITY_READING_LIST|shortlist full review]] dan [[02-Literature/Literature-Matrix/SCREENING_MATRIX|keputusan screening]]. Daftar di bawah merekam urutan awal saat inventaris, berdasarkan judul dan halaman pembuka. Kotak di daftar awal mencatat pekerjaan baca, dengan status triase yang tercatat di matriks.
 
 ## MobileNetV4 dan evaluasi langsung
 

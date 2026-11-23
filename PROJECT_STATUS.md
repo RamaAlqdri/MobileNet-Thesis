@@ -9,7 +9,7 @@ tags: [mobilenet, thesis-progress]
 
 **Pembaruan terakhir** 2026-11-23 (Asia/Jakarta)
 
-**Fase** Eksplorasi literatur. Workspace dan inventaris lokal telah disiapkan, dengan screening sebagai tahap berikutnya.
+**Fase** Eksplorasi literatur. Screening awal dan pemetaan korpus lokal selesai. Tahap berikutnya adalah full review.
 
 **Tujuan** Memetakan pendekatan optimasi MobileNet dan bukti pengaruhnya terhadap akurasi, latensi, memori, ukuran model, serta kompleksitas komputasi pada perangkat mobile dan edge.
 
@@ -17,22 +17,31 @@ tags: [mobilenet, thesis-progress]
 | --- | ---: |
 | PDF ditemukan di `Paper/` | 29 |
 | Paper diinventarisasi, dengan Paper ID | 29 |
-| Paper selesai direview | 0 |
-| Paper menunggu screening atau review | 29 |
-| Paper masuk sintesis | 0 |
-| Research gap teridentifikasi | 0 |
+| Paper selesai screening awal | 29 |
+| INCLUDE / MAYBE / EXCLUDE | 19 / 9 / 1 |
+| Paper menunggu screening awal | 0 |
+| Paper di shortlist full review | 15 |
+| Full review selesai | 0 |
+| Paper masuk sintesis berbasis full review | 0 |
+| Kandidat gap (hypothesized gap) | 6 |
+| Gap yang didukung bukti full review | 0 |
 | Pertanyaan riset dirumuskan | 0 |
 
-Status per sumber ada di [[02-Literature/PAPER_INVENTORY]]. Seluruh entri dalam antrean masih menunggu keputusan screening. Daftar bukti dan pertanyaan ada di [[03-Synthesis/Research-Gaps/GAP_REGISTER]] dan [[03-Synthesis/Research-Questions/QUESTION_REGISTER]].
+Keputusan triase satu reviewer ada di [[02-Literature/Literature-Matrix/SCREENING_MATRIX]]. Pemetaan awal ada di [[03-Synthesis/PRELIMINARY_LITERATURE_MAP]] dan [[03-Synthesis/RESEARCH_TAXONOMY]]. Observasi kandidat ada di [[03-Synthesis/Research-Gaps/PRELIMINARY_GAPS]].
 
 ## Pertanyaan terbuka dan hambatan
 
-- Pertanyaan terbuka untuk screening meliputi cakupan studi arsitektur dasar, relevansi studi FPGA atau domain lain, dan syarat bukti latensi untuk perbandingan.
-- Korpus awal memiliki PDF MobileNetV4 sebagai sumber arsitektur dasar. PDF utama MobileNetV3 belum ditemukan dalam direktori yang diperiksa.
-- Verifikasi eksternal metadata dan DOI berada di luar cakupan kebijakan lokal. Lihat catatan per versi di inventaris dan [[docs/RESEARCH_SKILL]].
+- P002 merupakan sumber dasar MobileNetV4 dalam versi preprint lokal. Sumber primer `Searching for MobileNetV3` tercantum sebagai referensi di P002, dengan PDF primer belum tersedia dalam inventaris.
+- Teks P022 dapat dibaca. Preflight struktur ulang tetap `UNAVAILABLE`. Gunakan locator berbasis bagian. Detail timing P006/P007 serta model GPU P025 memerlukan pemeriksaan saat full review.
+- Status kelayakan final, mutu eksperimen, kesetaraan runtime, dan transfer hasil FPGA atau domain lain masih perlu dinilai. Validasi manusia atas keputusan triase belum dilakukan.
+- Verifikasi eksternal metadata dan DOI berada di luar cakupan lokal. Lihat versi sumber di [[02-Literature/PAPER_INVENTORY]].
+
+## Status Git
+
+Branch `master` awalnya berada di `fd0111d` tanpa remote terdaftar. Saat recheck Phase 2, `origin/master` tercatat pada commit dasar yang sama. Seluruh pekerjaan Phase 2 memakai Git lokal.
 
 ## Prioritas berikutnya
 
-1. Dokumentasikan kriteria kelayakan studi dan cari salinan lokal paper dasar MobileNetV3 bila tersedia.
-2. Mulai screening dari [[02-Literature/Reading-Queue/READING_QUEUE]]. Lakukan full-text review pada paper yang lolos dan catat bukti dengan lokasi rujukan.
-3. Isi matriks dari review selesai sebelum menyusun sintesis lintas paper.
+1. Mulai full review dengan P002 dan P028 untuk mengekstrak konfigurasi baseline, backend, dan protokol timing. Lanjut dari [[02-Literature/Reading-Queue/PRIORITY_READING_LIST]].
+2. Periksa ketersediaan salinan lokal sumber dasar V3 dan telaah kembali keputusan MAYBE bila arah review berubah.
+3. Isi [[02-Literature/Literature-Matrix/LITERATURE_MATRIX]] dari review lengkap dan gunakan untuk menguji kandidat gap.

@@ -11,7 +11,7 @@ Pemeriksaan rekursif di `Paper/` menemukan **29 PDF** (96.171.972 byte), dengan 
 
 Judul, penulis, venue, tahun dan pengenal diambil dari halaman pembuka atau informasi sitasi yang tercetak pada PDF. `pdfinfo` digunakan untuk jumlah halaman dan pemeriksaan metadata internal. DOI dan arXiv ID dicatat sebagaimana tercantum, dengan resolusi eksternal `Not verified`. Judul dan penulis lengkap ada di catatan tiap Paper ID. Tidak ada duplikat yang terdeteksi dari hash SHA-256, DOI atau arXiv ID, dan judul yang dinormalisasi. Variasi judul antarversi masih mungkin.
 
-Seluruh sumber berstatus **Menunggu screening**. Cakupan baca sesi ini adalah metadata dan pemeriksaan halaman pembuka. Preflight ARS menghasilkan 28 `PASS` dan satu `UNAVAILABLE` (P022). Hasil itu hanya menilai struktur PDF. Lihat [[docs/RESEARCH_SKILL]] dan [[02-Literature/Reading-Queue/READING_QUEUE]].
+Kolom status di bawah merekam saat inventaris awal, ketika semua sumber **Menunggu screening**. Keputusan terkini tersedia di [[02-Literature/Literature-Matrix/SCREENING_MATRIX]]. Cakupan baca pada tahap inventaris adalah metadata dan pemeriksaan halaman pembuka. Preflight ARS menghasilkan 28 `PASS` dan satu `UNAVAILABLE` (P022). Hasil itu hanya menilai struktur PDF. Lihat [[docs/RESEARCH_SKILL]] dan [[02-Literature/Reading-Queue/READING_QUEUE]].
 
 | Paper ID | Judul | Tahun | Pengenal tercantum | Nama dan path PDF | Halaman | Status |
 | --- | --- | ---: | --- | --- | ---: | --- |

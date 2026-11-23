@@ -23,7 +23,7 @@ tags: [mobilenet, literature-review, thesis-progress]
 | Inventaris dan literature review | `ars/deep-research/WORKFLOW.md`, mode `lit-review` untuk review literatur. Untuk ingest, lihat `agents/bibliography_agent.md` tentang korpus pengguna dan provenance. |
 | Verifikasi bukti dan rujukan | `ars/deep-research/agents/source_verification_agent.md`, `ars/shared/references/evidence_row_protocol.md` untuk kontrak Phase E jika tahap tersebut dipakai, dan `ars/academic-paper/WORKFLOW.md` mode `citation-check` untuk pemeriksaan sitasi saat penulisan. |
 | Sintesis dan research gap | `ars/deep-research/agents/synthesis_agent.md`. Bentuk matriks, bandingkan konvergensi, perbedaan dan kontradiksi, lalu nilai cakupan dan calon gap. |
-| Screening studi | `ars/sr-screener/WORKFLOW.md` bila screening diminta. Mulai dari protokol yang sesuai dan bedakan keputusan screening dari prioritas baca sementara. |
+| Screening studi | `ars/sr-screener/WORKFLOW.md` bila screening diminta. Phase 2 memakai mode `quick` untuk 29 PDF dengan [[02-Literature/SCREENING_PROTOCOL]] dan jejak bukti per ID. Triase satu reviewer ini belum menjalani pilot, review independen, atau verifikasi manusia. |
 
 Alias `/ars-*` dijelaskan dalam router sebagai rute ke resep prompt. Di Codex, baca resep dan workflow yang ditunjuk sesuai tugas.
 
